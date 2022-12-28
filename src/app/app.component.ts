@@ -10,7 +10,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
-  template: ``,
+  template: `
+    <ion-app>
+        <ion-router-outlet></ion-router-outlet>
+    </ion-app>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {}
