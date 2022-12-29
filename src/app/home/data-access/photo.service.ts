@@ -8,7 +8,7 @@ import {
 import { Capacitor } from '@capacitor/core';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Platform } from '@ionic/angular';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, take, tap } from 'rxjs';
 import { StorageService } from 'src/app/shared/data-access/storage.service';
 import { Photo } from 'src/app/shared/interfaces/photo';
 
@@ -80,5 +80,11 @@ export class PhotoService {
       console.log(err);
       throw new Error('Could not save photo');
     }
+  }
+
+  load() {
+    this.storageService.load$.pipe(take(1)).subscribe((photos) => {
+      this.#photos$.next(photos);
+    });
   }
 }
