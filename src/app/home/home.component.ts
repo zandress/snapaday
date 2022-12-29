@@ -6,9 +6,6 @@ import { IonicModule } from '@ionic/angular';
 import { map } from 'rxjs';
 import { PhotoService } from './data-access/photo.service';
 import { PhotoListComponentModule } from './ui/photo-list.component';
-import { Drivers } from '@ionic/storage';
-import { IonicStorageModule } from '@ionic/storage-angular';
-import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 
 @Component({
   selector: 'app-home',
@@ -55,14 +52,6 @@ export class HomeComponent {
   imports: [
     CommonModule,
     IonicModule,
-    IonicStorageModule.forRoot({
-      driverOrder: [
-        // eslint-disable-next-line no-underscore-dangle
-        CordovaSQLiteDriver._driver,
-        Drivers.IndexedDB,
-        Drivers.LocalStorage,
-      ],
-    }),
     RouterModule.forChild([
       {
         path: '',
