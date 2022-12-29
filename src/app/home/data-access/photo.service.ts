@@ -8,4 +8,17 @@ import { Photo } from "src/app/shared/interfaces/photo";
 export class PhotoService {
     #photos$ = new BehaviorSubject<Photo[]>([]);
     photos$ = this.#photos$.asObservable();
+
+    private addPhoto(fileName: string, filePath: string) {
+        const newPhotos = [
+            {
+                name: fileName,
+                path: filePath,
+                dateTaken: new Date().toISOString(),
+            },
+            ...this.#photos$.value,
+        ];
+
+        this.#photos$.next(newPhotos);
+    }
 }
