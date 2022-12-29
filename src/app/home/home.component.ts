@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { map } from 'rxjs';
 import { PhotoService } from './data-access/photo.service';
-import { PhotoListComponentModule } from "./ui/photo-list.component";
+import { PhotoListComponentModule } from './ui/photo-list.component';
 
 @Component({
   selector: 'app-home',
@@ -32,12 +32,12 @@ import { PhotoListComponentModule } from "./ui/photo-list.component";
 export class HomeComponent {
   photos$ = this.photoService.photos$.pipe(
     map((photos) =>
-    photos.map((photo) => ({
-      ...photo,
-      safeResourceURL: this.sanitizer.bypassSecurityTrustResourceUrl(
-        photo.path
-      ),
-    })),
+      photos.map((photo) => ({
+        ...photo,
+        safeResourceUrl: this.sanitizer.bypassSecurityTrustResourceUrl(
+          photo.path
+        ),
+      }))
     )
   );
 
@@ -48,17 +48,17 @@ export class HomeComponent {
 }
 
 @NgModule({
-    declarations: [HomeComponent],
-    imports: [
-        CommonModule,
-        IonicModule,
-        RouterModule.forChild([
-            {
-                path: '',
-                component: HomeComponent,
-            },
-        ]),
-        PhotoListComponentModule
-    ]
+  declarations: [HomeComponent],
+  imports: [
+    CommonModule,
+    IonicModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: HomeComponent,
+      },
+    ]),
+    PhotoListComponentModule,
+  ],
 })
 export class HomeComponentModule {}
