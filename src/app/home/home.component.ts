@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { map } from 'rxjs';
+import { hasShadowDom } from '@ionic/core/dist/types/utils/helpers';
+import { combineLatest, map } from 'rxjs';
 import { PhotoService } from './data-access/photo.service';
 import { PhotoListComponentModule } from './ui/photo-list.component';
 
@@ -39,6 +40,16 @@ export class HomeComponent {
         ),
       }))
     )
+  );
+
+  vm$ = combineLatest([
+    this.photos$,
+    this.photoService.hasTakenPhotoToday$,
+  ]).pipe(
+    map(([photos, hasTakenPhotoToday]) => ({
+      photos,
+      hasTakenPhotoToday,
+    }))
   );
 
   constructor(
