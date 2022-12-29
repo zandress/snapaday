@@ -4,5 +4,5 @@ export interface Photo {
     name: string;
     path: string;
     dateTaken: string;
-    safeResourceUrl?: SafeResourceUrl
+    safeResourceUrl?: SafeResourceUrl;
 }
