@@ -8,7 +8,7 @@ import {
 import { Capacitor } from '@capacitor/core';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Platform } from '@ionic/angular';
-import { BehaviorSubject, take, tap } from 'rxjs';
+import { BehaviorSubject, map, take, tap } from 'rxjs';
 import { StorageService } from 'src/app/shared/data-access/storage.service';
 import { Photo } from 'src/app/shared/interfaces/photo';
 
@@ -19,6 +19,18 @@ export class PhotoService {
   #photos$ = new BehaviorSubject<Photo[]>([]);
   photos$ = this.#photos$.pipe(
     tap((photos) => this.storageService.save(photos))
+  );
+
+  hasTakenPhotoToday$ = this.#photos$.pipe(
+    map((photos) =>
+      photos.find(
+        (photo) =>
+          new Date().setHours(0, 0, 0, 0) ===
+          new Date(photo.dateTaken).setHours(0, 0, 0, 0)
+      )
+        ? true
+        : false
+    )
   );
 
   // Receive a fileName and filePath
