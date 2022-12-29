@@ -47,6 +47,7 @@ export class PhotoService {
     };
 
     try {
+      // Call the camera plugin
       const photo = await Camera.getPhoto(options);
 
       if (photo.path) {
