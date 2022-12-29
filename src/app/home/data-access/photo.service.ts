@@ -55,6 +55,7 @@ export class PhotoService {
       } else if (photo.dataUrl) {
         this.addPhoto(Date.now().toString(), photo.dataUrl);
       }
+      
     } catch (err) {
       console.log(err);
       throw new Error('Could not save photo');
