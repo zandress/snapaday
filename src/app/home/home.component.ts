@@ -17,8 +17,8 @@ import { SlideshowComponentModule } from '../slideshow/slideshow.component';
           <ion-title>Snapaday</ion-title>
           <ion-buttons slot="end">
             <ion-button
-              (click)="photoService.takePhoto()"
               [disabled]="vm.hasTakenPhotoToday === true"
+              (click)="photoService.takePhoto()"
             >
               <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
             </ion-button>
