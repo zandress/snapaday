@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { PhotoService } from './data-access/photo.service';
 import { PhotoListComponentModule } from './ui/photo-list.component';
+import { SlideshowComponentModule } from '../slideshow/slideshow.component';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +34,11 @@ import { PhotoListComponentModule } from './ui/photo-list.component';
           [isOpen]="vm.modalIsOpen"
           [canDismiss]="true"
           (ionModalDidDismiss)="modalIsOpen$.next(false)"
-        ></ion-modal>
+        >
+          <ng-template>
+            <app-slideshow [photos]="vm.photos"></app-slideshow>
+          </ng-template>
+        </ion-modal>
       </ion-content>
     </ng-container>
   `,
@@ -83,6 +88,7 @@ export class HomeComponent {
       },
     ]),
     PhotoListComponentModule,
+    SlideshowComponentModule,
   ],
 })
 export class HomeComponentModule {}
