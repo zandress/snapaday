@@ -10,7 +10,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
   selector: 'app-slideshow-image',
   template: `
     <div class="image-container">
-      <img src="safeResourceUrl" />
+      <img [src]="safeResourceUrl" />
     </div>
   `,
   styles: [
