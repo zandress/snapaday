@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, concatMap, delay, from, of, switchMap } from 'rxjs';
 import { Photo } from '../shared/interfaces/photo';
 
 @Component({
@@ -35,6 +35,18 @@ import { Photo } from '../shared/interfaces/photo';
 })
 export class SlideshowComponent {
   currentPhotos$ = new BehaviorSubject<Photo[]>([]);
+  currentPhoto$ = this.currentPhotos$.pipe(
+    // Emit one photo at a time
+    switchMap((photos) => from(photos)),
+    concatMap((photo) =>
+      // Create a new stream for each individual photo
+      of(photo).pipe(
+        // Creating a stream for each individual photo
+        // will allow us to delay the start of the stream
+        delay(500)
+      )
+    )
+  );
 
   constructor(protected modalCtrl: ModalController) {}
 
