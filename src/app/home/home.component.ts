@@ -21,6 +21,9 @@ import { PhotoListComponentModule } from './ui/photo-list.component';
             >
               <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
             </ion-button>
+            <ion-button (click)="modalIsOpen$.next(true)">
+              <ion-icon name="play" slot="icon-only"></ion-icon>
+            </ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
