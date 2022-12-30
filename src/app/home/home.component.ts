@@ -26,6 +26,11 @@ import { PhotoListComponentModule } from './ui/photo-list.component';
       </ion-header>
       <ion-content>
         <app-photo-list [photos]="vm.photos"></app-photo-list>
+        <ion-modal
+          [isOpen]="vm.modalIsOpen"
+          [canDismiss]="true"
+          (ionModalDidDismiss)="modalIsOpen$.next(false)"
+        ></ion-modal>
       </ion-content>
     </ng-container>
   `,
