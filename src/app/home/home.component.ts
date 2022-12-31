@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { PhotoService } from './data-access/photo.service';
 import { PhotoListComponentModule } from './ui/photo-list.component';
@@ -36,6 +36,7 @@ import { SlideshowComponentModule } from '../slideshow/slideshow.component';
         <ion-modal
           [isOpen]="vm.modalIsOpen"
           [canDismiss]="true"
+          [presentingElement]="routerOutlet.nativeEl"
           (ionModalDidDismiss)="modalIsOpen$.next(false)"
         >
           <ng-template>
@@ -75,7 +76,8 @@ export class HomeComponent {
 
   constructor(
     protected photoService: PhotoService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    public routerOutlet: IonRouterOutlet,
   ) {}
 }
 
