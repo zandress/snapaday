@@ -29,7 +29,10 @@ import { SlideshowComponentModule } from '../slideshow/slideshow.component';
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <app-photo-list [photos]="vm.photos"></app-photo-list>
+        <app-photo-list 
+          [photos]="vm.photos"
+          (delete)="photoService.deletePhoto($event)"
+        ></app-photo-list>
         <ion-modal
           [isOpen]="vm.modalIsOpen"
           [canDismiss]="true"
